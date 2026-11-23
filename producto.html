@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Garage - Detalle de producto</title>
+    <link rel="stylesheet" href="recursos/css/componentes.css">
+    <link rel="stylesheet" href="recursos/css/index.css">
+    <script type="module" src="./recursos/js/producto.js"></script>
+</head>
+<body>
+    <a class="salto-contenido" href="#contenido">Ir al contenido</a>
+    <header class="cabecera-principal">
+        <div class="cabecera-interior">
+            <a href="./index.html">
+                <img src="./recursos/imagenes/logo.svg" alt="logo Racing Garage">
+            </a>
+
+            <nav aria-label="Principal">
+                <a href="./index.html">Inicio</a>
+                <a href="./catalogo.html" aria-current="location">Catálogo</a>
+                <a href="./nosotros.html">Nosotros</a>
+                <a href="./contacto.html">Contacto</a>
+                <a href="./carrito.html">Carrito</a>
+            </nav>
+        </div>
+    </header>
+    <main id="contenido" tabindex="-1" class="contenido-principal detalle-producto">
+        <a class="vinculo-secundario" href="./catalogo.html">Volver al catálogo</a>
+        <h1>Llantas Forjadas RS-7</h1>
+
+        <picture>
+            <img src="./recursos/imagenes/producto/llantas.jpg" alt="Llantas forjadas RS-7">
+        </picture>
+
+        <p>
+            Rines forjados de aluminio de alto rendimiento, diseñados para pistas de carreras y uso en calle.
+            Compatibles con la mayoría de vehículos deportivos europeos y japoneses.
+        </p>
+
+        <ul class="panel" aria-label="Especificaciones y precio">
+            <li>Material: Aluminio forjado 6061-T6</li>
+            <li>Diámetro: 18" / 19" / 20"</li>
+            <li>Peso: 7.8 kg c/u</li>
+            <li>Garantía: 3 años</li>
+            <li>Precio $ 1249</li>
+        </ul>
+
+        <!-- agregar al carrito -->
+        <form class="formulario-agregar" action="./carrito.html" method="post" aria-labelledby="boton-agregar">
+            <div class="campo-formulario">
+                <label for="id-cantidad">Cantidad</label>
+                <input type="number" name="cantidad" id="id-cantidad" value="1" min="1" required>
+            </div>
+            <button class="boton-principal" type="submit" id="boton-agregar">Agregar al carrito</button>
+        </form>
+    </main>
+    <footer class="pie-principal">
+        <ul class="pie-lista">
+            <li>
+                <a href="https://instagram.com/@racinggarage" target="_blank" aria-label="Seguinos en Instagram, se abre en una pestaña nueva">
+                    @racinggarage
+                </a>
+            </li>
+            <li>
+                Córdoba, Argentina
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>

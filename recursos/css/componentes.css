@@ -1,0 +1,389 @@
+/* Racing Garage · Componentes reutilizables */
+
+.boton-principal,
+.boton-secundario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transicion);
+}
+
+.boton-principal {
+    background: var(--color-principal);
+    color: var(--color-tinta);
+}
+
+.boton-principal:hover {
+    background: var(--color-principal-hover);
+    color: var(--color-tinta);
+    box-shadow: 0 6px 24px var(--color-acento-suave);
+    transform: translateY(-2px);
+}
+
+.boton-secundario {
+    border-color: var(--color-borde);
+    background: var(--color-control);
+    color: var(--color-texto);
+}
+
+.boton-secundario:hover {
+    border-color: var(--color-principal);
+    color: var(--color-principal-hover);
+}
+
+.vinculo-secundario {
+    color: var(--color-texto-secundario);
+    font-weight: 750;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.vinculo-secundario:hover {
+    color: var(--color-principal-hover);
+}
+
+/* Formularios */
+.formulario {
+    display: grid;
+    gap: 16px;
+}
+
+.campo-formulario,
+.campo-filtro {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    min-width: 0;
+}
+
+.campo-formulario label,
+.campo-filtro label,
+.formulario-agregar label {
+    color: var(--color-texto-secundario);
+    font-size: .9rem;
+    font-weight: 750;
+}
+
+.formulario input:not([type="radio"]),
+.formulario textarea,
+.formulario-agregar input,
+.vista-carrito input,
+.campo-filtro input,
+.campo-filtro select {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid var(--color-borde-control);
+    border-radius: 8px;
+    background: var(--color-control);
+    color: var(--color-texto);
+    font: inherit;
+    transition: var(--transicion);
+}
+
+.formulario textarea {
+    min-height: 142px;
+    resize: vertical;
+}
+
+.formulario ::placeholder {
+    color: var(--color-texto-secundario);
+    opacity: .85;
+}
+
+/* Superficies y tarjetas */
+.panel,
+.tarjeta-producto,
+.tarjeta-valor,
+.item-carrito,
+.resumen-pedido {
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    background: var(--color-tarjeta);
+}
+
+.panel,
+.tarjeta-valor,
+.resumen-pedido {
+    padding: clamp(18px, 3vw, 32px);
+}
+
+.panel > h2,
+.resumen-pedido > h2 {
+    margin-top: 0;
+}
+
+.tarjeta-producto {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 11px;
+    padding: 12px 12px 16px;
+    transition: var(--transicion);
+}
+
+.tarjeta-producto:hover,
+.tarjeta-producto:focus-within {
+    border-color: var(--color-acento-borde);
+    box-shadow: var(--sombra-media);
+}
+
+.tarjeta-producto picture {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--color-control);
+}
+
+.tarjeta-producto picture img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform .25s ease;
+}
+
+.tarjeta-producto:hover picture img {
+    transform: scale(1.035);
+}
+
+.tarjeta-producto h3,
+.tarjeta-producto > p,
+.tarjeta-producto ul {
+    margin-inline: 4px;
+}
+
+.tarjeta-producto > p,
+.tarjeta-producto ul {
+    color: var(--color-texto-secundario);
+    font-size: .91rem;
+}
+
+.tarjeta-producto ul {
+    display: grid;
+    gap: 7px;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-borde);
+    list-style: none;
+}
+
+.tarjeta-producto li:last-child {
+    color: var(--color-principal);
+    font-size: 1.13rem;
+    font-weight: 850;
+}
+
+.tarjeta-producto .boton-secundario {
+    margin-inline: 4px;
+}
+
+.item-carrito {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+}
+
+.item-carrito picture img {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 9px;
+    object-fit: cover;
+}
+
+.item-carrito h3 {
+    overflow-wrap: anywhere;
+}
+
+.item-carrito .campo-formulario {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 78px;
+    align-items: center;
+}
+
+.item-carrito input {
+    text-align: center;
+}
+
+.item-carrito-precio {
+    color: var(--color-principal);
+    font-weight: 850;
+}
+
+.item-carrito .boton-secundario {
+    justify-self: end;
+}
+
+.tarjeta-valor {
+    border-top: 3px solid var(--color-principal);
+}
+
+.tarjeta-valor p {
+    margin-top: 10px;
+    color: var(--color-texto-secundario);
+}
+
+/* Resúmenes y estados */
+.resumen-lista,
+.resumen-pedido ul {
+    display: grid;
+    gap: 0;
+    margin-bottom: 18px;
+    list-style: none;
+}
+
+.resumen-lista li,
+.resumen-pedido li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--color-borde);
+    color: var(--color-texto-secundario);
+}
+
+.resumen-lista li:last-child,
+.resumen-pedido li:last-child {
+    border-bottom: 0;
+    color: var(--color-texto);
+    font-size: 1.2rem;
+    font-weight: 850;
+}
+
+.resumen-lista li span:last-child,
+.resumen-pedido li span:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.resumen-pedido .boton-principal,
+.resumen-pedido .vinculo-secundario {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.resumen-pedido .vinculo-secundario {
+    margin-top: 13px;
+    text-align: center;
+}
+
+.separador-resumen {
+    border-top: 1px dashed var(--color-borde);
+    padding-top: 8px;
+    margin-top: 8px;
+}
+
+.cabecera-principal nav a .badge-carrito {
+    display: inline-flex;
+    margin-left: 6px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--color-principal);
+    color: var(--color-tinta);
+    font-size: .75rem;
+    font-weight: 850;
+}
+
+.notificacion-toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    max-width: calc(100vw - 40px);
+    padding: 14px 18px;
+    border: 1px solid var(--color-borde);
+    border-left: 4px solid var(--color-principal);
+    border-radius: 10px;
+    background: var(--color-tarjeta);
+    box-shadow: var(--sombra-media);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: var(--transicion);
+    pointer-events: none;
+}
+
+.notificacion-toast.notificacion-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.notificacion-toast.notificacion-warning { border-left-color: #f5b84b; }
+.notificacion-toast.notificacion-info { border-left-color: #8fb9ff; }
+
+.mensaje-vacio {
+    display: grid;
+    grid-column: 1 / -1;
+    justify-items: center;
+    gap: 14px;
+    padding: 36px 18px;
+    border: 1px dashed var(--color-borde-control);
+    border-radius: var(--radio-borde);
+    background: var(--color-tarjeta);
+    color: var(--color-texto-secundario);
+    text-align: center;
+}
+
+/* Navegación por teclado y nombres accesibles */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.salto-contenido {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1100;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: var(--color-texto);
+    color: var(--color-tinta);
+    font-weight: 800;
+    transform: translateY(calc(-100% - 20px));
+}
+
+.salto-contenido:focus {
+    transform: none;
+}
+
+@media (width >= 600px) {
+    .item-carrito {
+        grid-template-areas: "foto nombre precio" "foto cantidad eliminar";
+        grid-template-columns: 88px minmax(0, 1fr) auto;
+    }
+
+    .item-carrito picture { grid-area: foto; }
+    .item-carrito h3 { grid-area: nombre; }
+    .item-carrito .boton-secundario { grid-area: eliminar; }
+
+    .item-carrito .campo-formulario {
+        grid-area: cantidad;
+        grid-template-columns: auto 78px;
+        justify-content: start;
+    }
+
+    .item-carrito-precio {
+        grid-area: precio;
+        justify-self: end;
+        white-space: nowrap;
+    }
+}
+

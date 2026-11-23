@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Garage - Finalizar compra</title>
+    <link rel="stylesheet" href="recursos/css/componentes.css">
+    <link rel="stylesheet" href="recursos/css/index.css">
+    <script type="module" src="./recursos/js/checkout.js"></script>
+</head>
+<body>
+    <a class="salto-contenido" href="#contenido">Ir al contenido</a>
+    <header class="cabecera-principal">
+        <div class="cabecera-interior">
+            <a href="./index.html">
+                <img src="./recursos/imagenes/logo.svg" alt="logo Racing Garage">
+            </a>
+
+            <nav aria-label="Principal">
+                <a href="./index.html">Inicio</a>
+                <a href="./catalogo.html">Catálogo</a>
+                <a href="./nosotros.html">Nosotros</a>
+                <a href="./contacto.html">Contacto</a>
+                <a href="./carrito.html">Carrito</a>
+            </nav>
+        </div>
+    </header>
+    <main id="contenido" tabindex="-1" class="contenido-principal">
+        <h1 id="titulo-compra">Finalizar compra</h1>
+
+        <form class="formulario compra-distribucion" action="./confirmacion.html" method="post" aria-labelledby="titulo-compra">
+            <section class="compra-datos panel">
+                <h2>Datos de envío</h2>
+                <div class="compra-campos">
+                    <div class="campo-formulario campo-ancho">
+                        <label for="id-nombre">Nombre completo</label>
+                        <input type="text" name="nombre" id="id-nombre" autocomplete="name" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    <div class="campo-formulario">
+                        <label for="id-email">Email</label>
+                        <input type="email" name="email" id="id-email" autocomplete="email" placeholder="juan@ejemplo.com" required>
+                    </div>
+                    <div class="campo-formulario">
+                        <label for="id-telefono">Teléfono</label>
+                        <input type="tel" name="telefono" id="id-telefono" autocomplete="tel" placeholder="Ej: 3511234567" required>
+                    </div>
+                    <div class="campo-formulario campo-ancho">
+                        <label for="id-direccion">Dirección</label>
+                        <input type="text" name="direccion" id="id-direccion" autocomplete="street-address" placeholder="Calle y número" required>
+                    </div>
+                    <div class="campo-formulario">
+                        <label for="id-ciudad">Ciudad</label>
+                        <input type="text" name="ciudad" id="id-ciudad" autocomplete="address-level2" placeholder="Ej: Córdoba" required>
+                    </div>
+                    <div class="campo-formulario">
+                        <label for="id-codigo-postal">Código postal</label>
+                        <input type="text" name="codigo-postal" id="id-codigo-postal" autocomplete="postal-code" placeholder="Ej: 5000" required>
+                    </div>
+                </div>
+
+                <h2>Forma de pago</h2>
+                <fieldset class="opciones-pago">
+                    <legend class="visually-hidden">Seleccionar método de pago</legend>
+
+                    <label class="opcion-radio">
+                        <input type="radio" name="metodo-pago" value="tarjeta" checked>
+                        <span>Tarjeta de crédito / débito</span>
+                    </label>
+
+                    <label class="opcion-radio">
+                        <input type="radio" name="metodo-pago" value="transferencia">
+                        <span>Transferencia</span>
+                    </label>
+
+                    <label class="opcion-radio">
+                        <input type="radio" name="metodo-pago" value="efectivo">
+                        <span>Efectivo contra entrega</span>
+                    </label>
+                </fieldset>
+            </section>
+
+            <section class="resumen-pedido">
+                <h2>Resumen del pedido</h2>
+                <ul class="resumen-lista" aria-live="polite" aria-atomic="true">
+                    <li><span>Subtotal</span> <span id="importe-subtotal">—</span></li>
+                    <li><span>Envío</span> <span>Gratis</span></li>
+                    <li><span>Total</span> <span id="importe-total">—</span></li>
+                </ul>
+                <p class="paso-whatsapp">En el siguiente paso vas a revisar el pedido y enviarlo vía WhatsApp.</p>
+                <button class="boton-principal" type="submit">Revisar pedido</button>
+                <a class="vinculo-secundario" href="./carrito.html">Volver al carrito</a>
+            </section>
+        </form>
+    </main>
+    <footer class="pie-principal">
+        <ul class="pie-lista">
+            <li>
+                <a href="https://instagram.com/@racinggarage" target="_blank" aria-label="Seguinos en Instagram, se abre en una pestaña nueva">
+                    @racinggarage
+                </a>
+            </li>
+            <li>
+                Córdoba, Argentina
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>

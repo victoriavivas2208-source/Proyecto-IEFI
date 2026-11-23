@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Garage - Catálogo</title>
+    <link rel="stylesheet" href="recursos/css/componentes.css">
+    <link rel="stylesheet" href="recursos/css/index.css">
+    <script type="module" src="./recursos/js/catalogo.js"></script>
+</head>
+<body>
+    <a class="salto-contenido" href="#contenido">Ir al contenido</a>
+    <header class="cabecera-principal">
+        <div class="cabecera-interior">
+            <a href="./index.html">
+                <img src="./recursos/imagenes/logo.svg" alt="logo Racing Garage">
+            </a>
+
+            <nav aria-label="Principal">
+                <a href="./index.html">Inicio</a>
+                <a href="./catalogo.html" aria-current="page">Catálogo</a>
+                <a href="./nosotros.html">Nosotros</a>
+                <a href="./contacto.html">Contacto</a>
+                <a href="./carrito.html">Carrito</a>
+            </nav>
+        </div>
+    </header>
+    <main id="contenido" tabindex="-1" class="contenido-principal">
+        <h1>Catálogo de Productos</h1>
+
+        <!-- filtros del catálogo -->
+        <form class="filtros-catalogo panel" action="./catalogo.html" method="get" aria-labelledby="titulo-filtros">
+            <fieldset class="grupo-filtros">
+                <legend id="titulo-filtros">Filtros del catálogo</legend>
+                <div class="campo-filtro campo-busqueda">
+                    <label for="id-busqueda">Buscar productos</label>
+                    <input type="search" name="busqueda" id="id-busqueda" placeholder="Ej: luces LED">
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="id-marca">Marca de vehículo</label>
+                    <select name="marca" id="id-marca">
+                        <option value="">Todas las marcas</option>
+                        <option value="ford">Ford</option>
+                        <option value="chevrolet">Chevrolet</option>
+                        <option value="volkswagen">Volkswagen</option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="id-modelo">Modelo de vehículo</label>
+                    <select name="modelo" id="id-modelo" aria-describedby="datos-vehiculo-demo">
+                        <option value="">Todos los modelos</option>
+                        <option value="cruze">Cruze</option>
+                        <option value="fiesta">Fiesta</option>
+                        <option value="focus">Focus</option>
+                        <option value="gol">Gol</option>
+                        <option value="onix">Onix</option>
+                        <option value="polo">Polo</option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="id-anio">Año del vehículo</label>
+                    <select name="anio" id="id-anio" aria-describedby="datos-vehiculo-demo">
+                        <option value="">Todos los años</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="id-categoria">Categoría</label>
+                    <select name="categoria" id="id-categoria">
+                        <option value="">Todas las categorías</option>
+                        <option value="interior">Accesorios interiores</option>
+                        <option value="exterior">Accesorios exteriores</option>
+                        <option value="limpieza">Limpieza y cuidado</option>
+                        <option value="iluminacion">Iluminación</option>
+                        <option value="personalizacion">Personalización</option>
+                    </select>
+                </div>
+                <p id="datos-vehiculo-demo" class="aviso-filtros">Los datos de modelo y año son ficticios y se usan para demostrar los filtros.</p>
+            </fieldset>
+        </form>
+
+        <section>
+            <div class="resultados-catalogo">
+                <h2>Productos disponibles</h2>
+                <p id="estado-resultados" role="status"></p>
+            </div>
+            <!-- renderizado dinámico de productos vía JavaScript -->
+            <div class="catalogo-productos"></div>
+        </section>
+    </main>
+    <footer class="pie-principal">
+        <ul class="pie-lista">
+            <li>
+                <a href="https://instagram.com/@racinggarage" target="_blank" aria-label="Seguinos en Instagram, se abre en una pestaña nueva">
+                    @racinggarage
+                </a>
+            </li>
+            <li>
+                Córdoba, Argentina
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>

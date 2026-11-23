@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Garage - Tu pedido</title>
+    <link rel="stylesheet" href="recursos/css/componentes.css">
+    <link rel="stylesheet" href="recursos/css/index.css">
+    <script type="module" src="./recursos/js/confirmacion.js"></script>
+</head>
+<body>
+    <a class="salto-contenido" href="#contenido">Ir al contenido</a>
+    <header class="cabecera-principal">
+        <div class="cabecera-interior">
+            <a href="./index.html">
+                <img src="./recursos/imagenes/logo.svg" alt="logo Racing Garage">
+            </a>
+
+            <nav aria-label="Principal">
+                <a href="./index.html">Inicio</a>
+                <a href="./catalogo.html">Catálogo</a>
+                <a href="./nosotros.html">Nosotros</a>
+                <a href="./contacto.html">Contacto</a>
+                <a href="./carrito.html">Carrito</a>
+            </nav>
+        </div>
+    </header>
+    <main id="contenido" tabindex="-1" class="contenido-principal mensaje-confirmacion panel">
+        <h1>Tu pedido</h1>
+        <p>No hay un pedido guardado en este navegador.</p>
+        <a class="boton-principal" href="./index.html">Volver al inicio</a>
+    </main>
+    <template id="plantilla-pedido">
+        <span class="confirmacion-icono" aria-hidden="true" hidden>
+            <svg viewBox="0 0 24 24" fill="none" focusable="false">
+                <path d="m5 12 4.5 4.5L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+        <h1></h1>
+        <section class="detalle-orden-confirmada">
+            <h2>Detalle del pedido</h2>
+            <dl>
+                <div data-codigo-pedido hidden>
+                    <dt>Número de pedido</dt>
+                    <dd></dd>
+                </div>
+                <div>
+                    <dt>Dirección de envío</dt>
+                    <dd data-direccion></dd>
+                </div>
+                <div data-metodo-pago hidden>
+                    <dt>Forma de pago elegida</dt>
+                    <dd></dd>
+                </div>
+            </dl>
+            <ul class="lista-items-orden"></ul>
+            <p class="total-orden"><span>Total del pedido</span> <strong></strong></p>
+        </section>
+        <div class="acciones-pedido">
+            <p role="status" tabindex="-1" data-estado-pedido></p>
+            <a class="boton-principal" target="_blank" rel="noopener noreferrer" data-abrir-whatsapp>Enviar pedido por WhatsApp</a>
+            <button class="boton-secundario" type="button" data-confirmar-envio hidden>Ya lo envié</button>
+        </div>
+        <a class="vinculo-secundario" href="./index.html">Volver al inicio</a>
+    </template>
+    <footer class="pie-principal">
+        <ul class="pie-lista">
+            <li>
+                <a href="https://instagram.com/@racinggarage" target="_blank" aria-label="Seguinos en Instagram, se abre en una pestaña nueva">
+                    @racinggarage
+                </a>
+            </li>
+            <li>
+                Córdoba, Argentina
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>

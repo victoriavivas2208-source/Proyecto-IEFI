@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Garage</title>
+    <link rel="stylesheet" href="recursos/css/componentes.css">
+    <link rel="stylesheet" href="recursos/css/index.css">
+    <script type="module" src="./recursos/js/main.js"></script>
+</head>
+<body>
+    <a class="salto-contenido" href="#contenido">Ir al contenido</a>
+    <header class="cabecera-principal">
+        <div class="cabecera-interior">
+            <a href="./index.html">
+                <img src="./recursos/imagenes/logo.svg" alt="logo Racing Garage">
+            </a>
+
+            <nav aria-label="Principal">
+                <a href="./index.html" aria-current="page">Inicio</a>
+                <a href="./catalogo.html">Catálogo</a>
+                <a href="./nosotros.html">Nosotros</a>
+                <a href="./contacto.html">Contacto</a>
+                <a href="./carrito.html">Carrito</a>
+            </nav>
+        </div>
+    </header>
+    <main id="contenido" tabindex="-1" class="contenido-principal">
+        <section class="portada" aria-labelledby="titulo-portada">
+            <div class="portada-contenido">
+                <h1 id="titulo-portada">Equipá tu vehículo</h1>
+                <p>Accesorios y productos para el cuidado, mantenimiento y personalización de tu auto.</p>
+                <a class="boton-principal" href="./catalogo.html">Ver catálogo</a>
+            </div>
+            <div class="portada-visual">
+                <img src="./recursos/imagenes/hero.png" width="1983" height="793" alt="Auto deportivo rojo bajo el emblema de Racing Garage Autopartes">
+            </div>
+        </section>
+
+        <section class="categorias">
+            <h2>Categorías</h2>
+            <ul class="categorias-lista">
+                <li>
+                    <a href="./catalogo.html?categoria=interior">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <circle cx="12" cy="12" r="9"/>
+                            <circle cx="12" cy="12" r="2"/>
+                            <path d="M3.5 9.5 10 11m4 0 6.5-1.5M12 14v7"/>
+                        </svg>
+                        Accesorios interiores
+                    </a>
+                </li>
+                <li>
+                    <a href="./catalogo.html?categoria=exterior">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="m5 11 2-5h10l2 5m1 0H4a1 1 0 0 0-1 1v5h18v-5a1 1 0 0 0-1-1ZM5 17v2m14-2v2M6 14h2m8 0h2"/>
+                        </svg>
+                        Accesorios exteriores
+                    </a>
+                </li>
+                <li>
+                    <a href="./catalogo.html?categoria=limpieza">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M11 3c-2.7 4-6 7.1-6 10.5a6 6 0 0 0 12 0c0-3.4-3.3-6.5-6-10.5ZM8 14a3 3 0 0 0 3 3M19 3v4m-2-2h4"/>
+                        </svg>
+                        Limpieza y cuidado
+                    </a>
+                </li>
+                <li>
+                    <a href="./catalogo.html?categoria=iluminacion">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M12 5c-5 0-8 3-8 7s3 7 8 7V5Zm4 2h4m-4 5h5m-5 5h4"/>
+                        </svg>
+                        Iluminación
+                    </a>
+                </li>
+                <li>
+                    <a href="./catalogo.html?categoria=personalizacion">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M5 4v3m0 4v9m7-16v8m0 4v4m7-16v2m0 4v10M3 7h4v4H3zm7 5h4v4h-4zm7-6h4v4h-4z"/>
+                        </svg>
+                        Personalización
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer class="pie-principal">
+        <ul class="pie-lista">
+            <li>
+                <a href="https://instagram.com/@racinggarage" target="_blank" aria-label="Seguinos en Instagram, se abre en una pestaña nueva">
+                    @racinggarage
+                </a>
+            </li>
+            <li>
+                Córdoba, Argentina
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>
