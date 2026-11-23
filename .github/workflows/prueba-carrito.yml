@@ -3,7 +3,7 @@ name: Pruebas del carrito
 on:
   push:
     branches:
-      - codex/demo-impuestos
+      - main
 
 permissions:
   contents: read
