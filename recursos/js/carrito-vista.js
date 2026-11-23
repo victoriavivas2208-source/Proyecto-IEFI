@@ -2,13 +2,42 @@
 // Lee los productos guardados en localStorage y los muestra en pantalla
 
 import { productos } from "./productos.js";
-import { CLAVE_CARRITO, leerCarrito, guardarCarrito, calcularTotal } from "./carrito.js";
+import { CLAVE_CARRITO, leerCarrito, guardarCarrito, calcularTotal, calcularImpuestos, calcularImpuestosCorrectos } from "./carrito.js";
 
-let carrito = leerCarrito();
+const modoImpuestos = new URLSearchParams(window.location.search).get("impuestos");
+const esDemostracion = modoImpuestos === "simulado" || modoImpuestos === "correcto";
+const simularError = modoImpuestos === "simulado";
+
+let carrito = esDemostracion ? [{
+    id: "llantas-rs7",
+    nombre: "Llantas Forjadas RS-7",
+    precio: 1249,
+    cantidad: 20,
+    imagen: "./recursos/imagenes/producto/llantas.jpg"
+}] : leerCarrito();
 
 // Elementos del HTML
 const contenedorProductos = document.querySelector(".carrito-productos");
 const listaResumen = document.querySelector(".resumen-pedido ul");
+
+if (esDemostracion) {
+    document.querySelector("#continuar-pedido").remove();
+    const estadoImpuestos = document.querySelector("#estado-impuestos");
+    estadoImpuestos.hidden = false;
+    estadoImpuestos.textContent = simularError
+        ? "Demostración con error. El impuesto de cada unidad se redondea a centenas de pesos antes de sumarse."
+        : "Demostración con cálculo correcto. Se aplica el 21 % al subtotal y se redondea a centavos.";
+} else {
+    document.querySelector("#volver-carrito-real").remove();
+}
+
+function formatearImporte(importe) {
+    if (!esDemostracion) return "$ " + importe.toLocaleString("es-AR");
+    return "$ " + importe.toLocaleString("es-AR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
 
 // Función que dibuja los productos del carrito en el HTML
 function mostrarCarrito() {
@@ -39,12 +68,16 @@ function mostrarCarrito() {
         });
     }
 
-    // Actualizamos el resumen con el total calculado
-    const total = calcularTotal(carrito);
+    const subtotal = calcularTotal(carrito);
+    let impuestos = 0;
+    if (esDemostracion) {
+        impuestos = simularError ? calcularImpuestos(carrito) : calcularImpuestosCorrectos(carrito);
+    }
     listaResumen.innerHTML = `
-        <li><span>Subtotal</span><span>$ ${total.toLocaleString("es-AR")}</span></li>
+        <li><span>Subtotal</span><span>${formatearImporte(subtotal)}</span></li>
+        ${esDemostracion ? `<li><span>Impuestos de ejemplo (21 %)</span><span>${formatearImporte(impuestos)}</span></li>` : ""}
         <li><span>Envío</span><span>Gratis</span></li>
-        <li><span>Total</span><span>$ ${total.toLocaleString("es-AR")}</span></li>
+        <li><span>Total</span><span>${formatearImporte(subtotal + impuestos)}</span></li>
     `;
 }
 
@@ -60,7 +93,7 @@ contenedorProductos.addEventListener("change", function (evento) {
                     item.cantidad = nuevaCantidad;
                 }
             });
-            guardarCarrito(carrito);
+            if (!esDemostracion) guardarCarrito(carrito);
             mostrarCarrito();
         }
     }
@@ -82,7 +115,7 @@ contenedorProductos.addEventListener("click", function (evento) {
         // Lo eliminamos del array y actualizamos el localStorage
         if (indice !== -1) {
             carrito.splice(indice, 1);
-            guardarCarrito(carrito);
+            if (!esDemostracion) guardarCarrito(carrito);
             mostrarCarrito();
         }
     }
@@ -92,6 +125,7 @@ contenedorProductos.addEventListener("click", function (evento) {
 mostrarCarrito();
 
 function actualizarCarrito() {
+    if (esDemostracion) return;
     carrito = leerCarrito();
     mostrarCarrito();
 }
