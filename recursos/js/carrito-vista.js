@@ -8,13 +8,9 @@ const modoImpuestos = new URLSearchParams(window.location.search).get("impuestos
 const esDemostracion = modoImpuestos === "simulado" || modoImpuestos === "correcto";
 const simularError = modoImpuestos === "simulado";
 
-let carrito = esDemostracion ? [{
-    id: "llantas-rs7",
-    nombre: "Llantas Forjadas RS-7",
-    precio: 1200,
-    cantidad: 20,
-    imagen: "./recursos/imagenes/producto/llantas.jpg"
-}] : leerCarrito();
+const llantaDemo = esDemostracion ? productos?.find(producto => producto.id === "llantas-rs7") : null;
+let carrito = esDemostracion ? [] : leerCarrito();
+if (llantaDemo) carrito.push({ ...llantaDemo, cantidad: 20 });
 
 // Elementos del HTML
 const contenedorProductos = document.querySelector(".carrito-productos");
@@ -24,9 +20,13 @@ if (esDemostracion) {
     document.querySelector("#continuar-pedido").remove();
     const estadoImpuestos = document.querySelector("#estado-impuestos");
     estadoImpuestos.hidden = false;
-    estadoImpuestos.textContent = simularError
-        ? "Demostración con error. El impuesto de cada unidad se redondea a centenas de pesos antes de sumarse."
-        : "Demostración con cálculo correcto. Se aplica el 21 % al subtotal.";
+    if (!llantaDemo) {
+        estadoImpuestos.textContent = "No se pudo cargar el producto de la demostración.";
+    } else {
+        estadoImpuestos.textContent = simularError
+            ? "Demostración con error. El impuesto de cada unidad se redondea a centenas de pesos antes de sumarse."
+            : "Demostración con cálculo correcto. Se aplica el 21 % al subtotal.";
+    }
 } else {
     document.querySelector("#volver-carrito-real").remove();
 }

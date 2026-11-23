@@ -4,7 +4,7 @@ import { fireEvent, screen, within } from "@testing-library/dom";
 import { afterEach, expect, test, vi } from "vitest";
 import carritoHtml from "../carrito.html?raw";
 
-vi.mock("../recursos/js/productos.js", () => ({ productos: [] }));
+vi.mock("../recursos/js/productos.js", async () => ({ productos: (await import("../recursos/datos/productos.json")).default }));
 
 afterEach(() => {
     document.body.replaceChildren();
