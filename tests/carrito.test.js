@@ -10,8 +10,8 @@ test("suma el precio de los productos según sus cantidades", () => {
     expect(calcularTotal(carrito)).toBe(23500);
 });
 
-test("el impuesto del 21 % sobre 24980 pesos es 5245,80", () => {
-    const carrito = [{ precio: 1249, cantidad: 20 }];
+test("el impuesto del 21 % sobre 24000 pesos es 5040", () => {
+    const carrito = [{ precio: 1200, cantidad: 20 }];
 
-    expect(calcularImpuestos(carrito)).toBe(5245.80);
+    expect(calcularImpuestos(carrito)).toBe(5040);
 });

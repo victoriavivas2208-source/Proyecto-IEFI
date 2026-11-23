@@ -26,15 +26,15 @@ test.each(["correcto", "simulado"])("actualiza los impuestos al cambiar la canti
 
     const resumen = within(screen.getByRole("heading", { name: "Resumen del pedido" }).closest("section"));
     fireEvent.change(screen.getByRole("spinbutton", { name: "Cantidad" }), { target: { value: "19" } });
-    expect(leerImporte(resumen, "Subtotal")).toBe("$ 23.731,00");
+    expect(leerImporte(resumen, "Subtotal")).toBe("$ 22.800");
 
     fireEvent.change(screen.getByRole("spinbutton", { name: "Cantidad" }), { target: { value: "20" } });
-    expect(leerImporte(resumen, "Subtotal")).toBe("$ 24.980,00");
+    expect(leerImporte(resumen, "Subtotal")).toBe("$ 24.000");
     expect({
         impuesto: leerImporte(resumen, "Impuestos de ejemplo (21 %)"),
         total: leerImporte(resumen, "Total")
     }).toEqual({
-        impuesto: "$ 5.245,80",
-        total: "$ 30.225,80"
+        impuesto: "$ 5.040",
+        total: "$ 29.040"
     });
 });

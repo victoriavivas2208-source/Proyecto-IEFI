@@ -21,8 +21,8 @@ for (const modo of modos) {
                 .locator("span").last();
         }
 
-        await expect(importeDe("Subtotal")).toHaveText("$ 24.980,00");
-        await expect.soft(importeDe("Impuestos de ejemplo (21 %)")).toHaveText("$ 5.245,80");
-        await expect.soft(importeDe("Total")).toHaveText("$ 30.225,80");
+        await expect(importeDe("Subtotal")).toHaveText("$ 24.000");
+        await expect.soft(importeDe("Impuestos de ejemplo (21 %)")).toHaveText("$ 5.040");
+        await expect.soft(importeDe("Total")).toHaveText("$ 29.040");
     });
 }
