@@ -22,3 +22,18 @@ jobs:
         run: npm ci
       - name: Ejecutar pruebas con Vitest
         run: npm test
+  probar-carrito-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v6
+      - name: Preparar Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Ejecutar pruebas E2E con Playwright
+        run: npm run test:e2e
