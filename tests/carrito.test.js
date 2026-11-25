@@ -1,3 +1,5 @@
+// tests unitario
+
 import { expect, test } from "vitest";
 import { calcularImpuestos, calcularTotal } from "../recursos/js/carrito.js";
 
