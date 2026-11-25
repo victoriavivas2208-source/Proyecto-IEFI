@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
+    "test:node": "node --test pruebas-node/carrito.node.js",
     "test:e2e": "playwright test"
   },
   "devDependencies": {

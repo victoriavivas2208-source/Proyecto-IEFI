@@ -9,6 +9,17 @@ permissions:
   contents: read
 
 jobs:
+  probar-carrito-node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v6
+      - name: Preparar Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Ejecutar pruebas unitarias nativas de Node.js
+        run: npm run test:node
   probar-carrito:
     runs-on: ubuntu-latest
     steps:
