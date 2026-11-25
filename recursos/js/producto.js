@@ -62,12 +62,14 @@ function manejarEnvioFormulario(evento, producto) {
 }
 
 const formulario = document.querySelector(".formulario-agregar");
+const botonAgregar = formulario.querySelector("#boton-agregar");
 const producto = productos === null ? null : buscarProductoSeleccionado();
 
 if (producto) {
     mostrarDatosProducto(producto);
     mostrarEspecificaciones(producto);
     formulario.addEventListener("submit", evento => manejarEnvioFormulario(evento, producto));
+    botonAgregar.disabled = false;
 } else {
     document.querySelector(".detalle-producto h1").textContent = "Producto no disponible";
     document.querySelector(".detalle-producto picture").hidden = true;
@@ -75,6 +77,5 @@ if (producto) {
     document.querySelector(".detalle-producto > p").textContent =
         "No pudimos cargar el producto. Volvé a cargar la página para intentarlo de nuevo.";
     formulario.querySelector("input").disabled = true;
-    formulario.querySelector("button").disabled = true;
 }
 
