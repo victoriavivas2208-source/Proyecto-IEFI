@@ -1,12 +1,8 @@
-import { leerCarrito, vaciarCarritoSiCoincide } from "./carrito.js";
+import { leerCarrito, vaciarCarritoSiCoincide, formatearImporte } from "./carrito.js";
 
 const numeroWhatsApp = "5493512031101";
 const contenedor = document.querySelector(".mensaje-confirmacion");
 const pedidoGuardado = localStorage.getItem("ultimo_pedido");
-
-function formatearImporte(importe) {
-    return "$ " + importe.toLocaleString("es-AR");
-}
 
 function crearEnlaceWhatsApp(pedido) {
     const referencia = pedido.codigo ? " " + pedido.codigo : "";
@@ -17,11 +13,16 @@ function crearEnlaceWhatsApp(pedido) {
             "• " + producto.nombre + " × " + producto.cantidad + " — " +
             formatearImporte(producto.precio * producto.cantidad)
         ),
-        "",
+        ""
+    ];
+    if (typeof pedido.impuestos === "number") {
+        mensaje.push("Subtotal: " + formatearImporte(pedido.subtotal), "Impuestos (21 %): " + formatearImporte(pedido.impuestos));
+    }
+    mensaje.push(
         "Total: " + formatearImporte(pedido.total),
         "Nombre: " + pedido.nombre,
         "Dirección de envío: " + pedido.direccion
-    ];
+    );
     if (pedido.metodoPago) mensaje.push("Forma de pago elegida: " + pedido.metodoPago);
 
     return "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensaje.join("\n"));
@@ -89,6 +90,13 @@ function mostrarPedido(pedido) {
     contenedor.querySelector("h1").textContent = "Tu pedido, " + pedido.nombre;
     contenedor.querySelector("[data-direccion]").textContent = pedido.direccion;
     contenedor.querySelector(".total-orden strong").textContent = formatearImporte(pedido.total);
+
+    if (typeof pedido.impuestos === "number") {
+        const importes = contenedor.querySelector("[data-importes-pedido]");
+        importes.querySelector("[data-subtotal]").textContent = formatearImporte(pedido.subtotal);
+        importes.querySelector("[data-impuestos]").textContent = formatearImporte(pedido.impuestos);
+        importes.hidden = false;
+    }
 
     if (pedido.codigo) {
         const codigoPedido = contenedor.querySelector("[data-codigo-pedido]");

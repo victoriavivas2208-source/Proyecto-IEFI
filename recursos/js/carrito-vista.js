@@ -2,38 +2,13 @@
 // Lee los productos guardados en localStorage y los muestra en pantalla
 
 import { productos } from "./productos.js";
-import { CLAVE_CARRITO, leerCarrito, guardarCarrito, calcularTotal, calcularImpuestos, calcularImpuestosCorrectos } from "./carrito.js";
+import { CLAVE_CARRITO, leerCarrito, guardarCarrito, calcularResumen, formatearImporte } from "./carrito.js";
 
-const modoImpuestos = new URLSearchParams(window.location.search).get("impuestos");
-const esDemostracion = modoImpuestos === "simulado" || modoImpuestos === "correcto";
-const simularError = modoImpuestos === "simulado";
-
-const llantaDemo = esDemostracion ? productos?.find(producto => producto.id === "llantas-rs7") : null;
-let carrito = esDemostracion ? [] : leerCarrito();
-if (llantaDemo) carrito.push({ ...llantaDemo, cantidad: 20 });
+let carrito = leerCarrito();
 
 // Elementos del HTML
 const contenedorProductos = document.querySelector(".carrito-productos");
 const listaResumen = document.querySelector(".resumen-pedido ul");
-
-if (esDemostracion) {
-    document.querySelector("#continuar-pedido").remove();
-    const estadoImpuestos = document.querySelector("#estado-impuestos");
-    estadoImpuestos.hidden = false;
-    if (!llantaDemo) {
-        estadoImpuestos.textContent = "No se pudo cargar el producto de la demostración.";
-    } else {
-        estadoImpuestos.textContent = simularError
-            ? "Demostración con error. El impuesto de cada unidad se redondea a centenas de pesos antes de sumarse."
-            : "Demostración con cálculo correcto. Se aplica el 21 % al subtotal.";
-    }
-} else {
-    document.querySelector("#volver-carrito-real").remove();
-}
-
-function formatearImporte(importe) {
-    return "$ " + importe.toLocaleString("es-AR");
-}
 
 // Función que dibuja los productos del carrito en el HTML
 function mostrarCarrito() {
@@ -56,7 +31,7 @@ function mostrarCarrito() {
                     <label for="cant-${item.id}">Cantidad</label>
                     <input type="number" id="cant-${item.id}" class="input-cantidad" data-id="${item.id}" value="${item.cantidad}" min="1">
                 </div>
-                <p class="item-carrito-precio">$ ${(item.precio * item.cantidad).toLocaleString("es-AR")}</p>
+                <p class="item-carrito-precio">${formatearImporte(item.precio * item.cantidad)}</p>
                 <button class="boton-secundario" type="button" data-id="${item.id}">Eliminar</button>
             `;
 
@@ -64,16 +39,12 @@ function mostrarCarrito() {
         });
     }
 
-    const subtotal = calcularTotal(carrito);
-    let impuestos = 0;
-    if (esDemostracion) {
-        impuestos = simularError ? calcularImpuestos(carrito) : calcularImpuestosCorrectos(carrito);
-    }
+    const { subtotal, impuestos, total } = calcularResumen(carrito);
     listaResumen.innerHTML = `
         <li><span>Subtotal</span><span>${formatearImporte(subtotal)}</span></li>
-        ${esDemostracion ? `<li><span>Impuestos de ejemplo (21 %)</span><span>${formatearImporte(impuestos)}</span></li>` : ""}
+        <li><span>Impuestos (21 %)</span><span>${formatearImporte(impuestos)}</span></li>
         <li><span>Envío</span><span>Gratis</span></li>
-        <li><span>Total</span><span>${formatearImporte(subtotal + impuestos)}</span></li>
+        <li><span>Total</span><span>${formatearImporte(total)}</span></li>
     `;
 }
 
@@ -89,7 +60,7 @@ contenedorProductos.addEventListener("change", function (evento) {
                     item.cantidad = nuevaCantidad;
                 }
             });
-            if (!esDemostracion) guardarCarrito(carrito);
+            guardarCarrito(carrito);
             mostrarCarrito();
         }
     }
@@ -111,7 +82,7 @@ contenedorProductos.addEventListener("click", function (evento) {
         // Lo eliminamos del array y actualizamos el localStorage
         if (indice !== -1) {
             carrito.splice(indice, 1);
-            if (!esDemostracion) guardarCarrito(carrito);
+            guardarCarrito(carrito);
             mostrarCarrito();
         }
     }
@@ -121,7 +92,6 @@ contenedorProductos.addEventListener("click", function (evento) {
 mostrarCarrito();
 
 function actualizarCarrito() {
-    if (esDemostracion) return;
     carrito = leerCarrito();
     mostrarCarrito();
 }

@@ -15,3 +15,9 @@ test("el impuesto del 21 % sobre 24000 pesos es 5040", () => {
 
     expect(calcularImpuestos(carrito)).toBe(5040);
 });
+
+test("redondea a centavos una vez, sobre el subtotal del carrito", () => {
+    const carrito = [{ precio: 100.03, cantidad: 2 }];
+
+    expect(calcularImpuestos(carrito)).toBe(42.01);
+});

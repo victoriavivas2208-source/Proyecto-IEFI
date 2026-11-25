@@ -1,13 +1,14 @@
 // Prepara el pedido para que el cliente lo revise antes de enviarlo por WhatsApp.
 
-import { CLAVE_CARRITO, leerCarrito, calcularTotal } from "./carrito.js";
+import { CLAVE_CARRITO, leerCarrito, calcularResumen, formatearImporte } from "./carrito.js";
 
 const formulario = document.querySelector(".formulario");
 
 function actualizarResumen() {
-    const importe = "$ " + calcularTotal(leerCarrito()).toLocaleString("es-AR");
-    document.querySelector("#importe-subtotal").textContent = importe;
-    document.querySelector("#importe-total").textContent = importe;
+    const { subtotal, impuestos, total } = calcularResumen(leerCarrito());
+    document.querySelector("#importe-subtotal").textContent = formatearImporte(subtotal);
+    document.querySelector("#importe-impuestos").textContent = formatearImporte(impuestos);
+    document.querySelector("#importe-total").textContent = formatearImporte(total);
 }
 
 actualizarResumen();
@@ -42,15 +43,13 @@ formulario.addEventListener("submit", function (evento) {
         return;
     }
 
-    const total = calcularTotal(carrito);
-
     const opcionPago = formulario.querySelector('input[name="metodo-pago"]:checked');
     const pedido = {
         codigo: "RG-" + Date.now().toString(36).toUpperCase(),
         nombre: nombre,
         direccion: direccion + ", " + ciudad + " (CP: " + codigoPostal + ")",
         metodoPago: opcionPago?.labels[0]?.textContent.trim(),
-        total: total,
+        ...calcularResumen(carrito),
         productos: carrito,
         estadoWhatsApp: "pendiente"
     };

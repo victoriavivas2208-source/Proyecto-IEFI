@@ -16,20 +16,21 @@ export function calcularTotal(carrito) {
     return total;
 }
 
-const TASA_IMPUESTO_DEMO = 0.21;
+const PORCENTAJE_IMPUESTOS = 21;
 
 export function calcularImpuestos(carrito) {
-    let impuestos = 0;
-    for (const item of carrito) {
-        // Error intencional: redondear cada impuesto unitario a centenas de pesos.
-        const impuestoUnitario = Math.round(item.precio * TASA_IMPUESTO_DEMO / 100) * 100;
-        impuestos += impuestoUnitario * item.cantidad;
-    }
-    return impuestos;
+    return Math.round(calcularTotal(carrito) * PORCENTAJE_IMPUESTOS) / 100;
 }
 
-export function calcularImpuestosCorrectos(carrito) {
-    return Math.round(calcularTotal(carrito) * TASA_IMPUESTO_DEMO * 100) / 100;
+export function calcularResumen(carrito) {
+    const subtotal = calcularTotal(carrito);
+    const impuestos = calcularImpuestos(carrito);
+    const total = Math.round((subtotal + impuestos) * 100) / 100;
+    return { subtotal, impuestos, total };
+}
+
+export function formatearImporte(importe) {
+    return "$ " + importe.toLocaleString("es-AR", { maximumFractionDigits: 2 });
 }
 
 export function vaciarCarritoSiCoincide(productos) {
